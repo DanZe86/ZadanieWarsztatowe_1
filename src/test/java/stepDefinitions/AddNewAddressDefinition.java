@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class AddNewAddressDefinition {
     private WebDriver driver;
 
+
     @Given("I have an open browser and log on created user")
     public void logToAccount() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
