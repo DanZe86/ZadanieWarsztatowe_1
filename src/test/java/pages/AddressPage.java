@@ -12,9 +12,12 @@ import java.util.List;
 public class AddressPage extends BasePage {
 
 
+
     public AddressPage(WebDriver driver) {
         super(driver);
     }
+
+
 
     @FindBy(xpath = "//div/a[@class='col-lg-4 col-md-6 col-sm-6 col-xs-12'][2]")
     private WebElement addAddress;

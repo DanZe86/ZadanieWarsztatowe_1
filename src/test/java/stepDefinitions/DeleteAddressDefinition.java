@@ -12,6 +12,8 @@ import pages.SignInPage;
 import java.util.concurrent.TimeUnit;
 
 public class DeleteAddressDefinition {
+    AddressPage newAddressPage;
+    SignInPage signInUser;
     private WebDriver driver;
 
     @Given("I have log an user")
@@ -21,38 +23,31 @@ public class DeleteAddressDefinition {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
-        SignInPage signInUser = new SignInPage(driver);
+        signInUser = new SignInPage(driver);
         signInUser.signInPage("spoqstvoerxbrpamfa@nthrl.com", "12345678");
-
     }
 
     @When("I enter site to user page with Address")
     public void i_enter_site_to_user_page_with_address() {
-        AddressPage newAddressPage = new AddressPage(driver);
+        newAddressPage = new AddressPage(driver);
         newAddressPage.goToUrl();
-
     }
 
     @Then("I check page url")
     public void i_check_page_url() {
-        AddressPage currentAddress = new AddressPage(driver);
-        Assert.assertEquals("https://mystore-testlab.coderslab.pl/index.php?controller=addresses", currentAddress.getUrl());
-
+        Assert.assertEquals("https://mystore-testlab.coderslab.pl/index.php?controller=addresses", newAddressPage.getUrl());
     }
 
     @When("I delete created address")
     public void i_delete_created_address() {
-        AddressPage deleteAddress = new AddressPage(driver);
-        deleteAddress.deleteAddress().click();
-
+        newAddressPage.deleteAddress().click();
     }
 
     @Then("I check if address was deleted")
     public void i_check_if_address_was_deleted() {
-        AddressPage isAddressDeleted = new AddressPage(driver);
-        Assert.assertEquals("Address successfully deleted!", isAddressDeleted.addressDeleted());
+        Assert.assertEquals("Address successfully deleted!", newAddressPage.addressDeleted());
         System.out.println("Address was deleted");
-        isAddressDeleted.waitASecond();
+        newAddressPage.waitASecond();
         driver.quit();
     }
 }
