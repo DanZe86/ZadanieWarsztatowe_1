@@ -17,8 +17,6 @@ public class AddressPage extends BasePage {
         super(driver);
     }
 
-
-
     @FindBy(xpath = "//div/a[@class='col-lg-4 col-md-6 col-sm-6 col-xs-12'][2]")
     private WebElement addAddress;
 
@@ -88,7 +86,6 @@ public class AddressPage extends BasePage {
         inputPhone.sendKeys(phoneNumber);
         waitASecond();
         saveButton.click();
-
     }
 
     public String addAddressConfirmation() {
@@ -106,8 +103,7 @@ public class AddressPage extends BasePage {
 
     public WebElement deleteAddress() {
         List<WebElement> multiDelete = new ArrayList<>();
-
-        multiDelete.addAll((deleteButton));
+                multiDelete.addAll((deleteButton));
         System.out.println(multiDelete.size());
         System.out.println(multiDelete.indexOf(multiDelete.size() - 1));
         WebElement lastDeleteButton = multiDelete.get(multiDelete.size() - 1);

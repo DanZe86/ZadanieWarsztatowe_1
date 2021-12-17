@@ -24,7 +24,7 @@ public class DeleteAddressDefinition {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
         signInUser = new SignInPage(driver);
-        signInUser.signInPage("spoqstvoerxbrpamfa@nthrl.com", "12345678");
+        signInUser.signInPage("nowy@email.pl", "12345678");
     }
 
     @When("I enter site to user page with Address")

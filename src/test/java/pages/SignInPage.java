@@ -25,7 +25,6 @@ public class SignInPage extends BasePage {
     @FindBy(css = ".logout.hidden-sm-down")
     private WebElement signOutButton;
 
-
     public void signInPage(String email, String password) {
         userEmailInput.click();
         userEmailInput.clear();

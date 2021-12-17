@@ -6,7 +6,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.BasePage;
 import pages.MyStorePage;
 import pages.SignInPage;
 
@@ -15,11 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 public class BuyItemDefinition {
     private WebDriver driver;
-    BasePage basePage;
     MyStorePage myStorePage;
     SignInPage signInUser;
     String[] value;
-
 
     @Given("I log user from exercise one")
     public void i_log_user_from_exercise_one() {
@@ -29,10 +26,8 @@ public class BuyItemDefinition {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
         signInUser = new SignInPage(driver);
-        signInUser.signInPage("spoqstvoerxbrpamfa@nthrl.com", "12345678");
-
+        signInUser.signInPage("nowy@email.pl", "12345678");
     }
-
 
     @When("I go to myStore page")
     public void goToUrl() {
@@ -98,8 +93,8 @@ public class BuyItemDefinition {
     @When("I pay by check and click on terms of service")
     public void i_pay_by_check() {
         myStorePage.choosePaymentMethod();
-        value = new String[1] ;
-        value[0] = myStorePage.getTotalPrice() ;
+        value = new String[1];
+        value[0] = myStorePage.getTotalPrice();
     }
 
     @When("I click on Order with an obligation to pay")
@@ -126,7 +121,7 @@ public class BuyItemDefinition {
 
         Assert.assertTrue(order.contains(totalValue));
         Assert.assertTrue(order.contains("Awaiting check payment"));
-
+        driver.quit();
 
     }
 

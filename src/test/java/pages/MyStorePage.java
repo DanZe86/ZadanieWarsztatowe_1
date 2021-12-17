@@ -88,8 +88,6 @@ public class MyStorePage extends BasePage {
     private WebElement historyOrder;
     //history-link historyOrder
 
-    //.account userAccount
-
     public void goToMyStore() {
         myStoreTile.click();
     }
@@ -158,7 +156,6 @@ public class MyStorePage extends BasePage {
             chooseAddress.click();
             continueButton.click();
         }
-
     }
 
     public void confirmShippingMethod() {
@@ -183,16 +180,15 @@ public class MyStorePage extends BasePage {
     public void orderWithAnObligarion() {
         buttonOrderWith.click();
     }
-
     //https://www.guru99.com/take-screenshot-selenium-webdriver.html#1
     public void makePrintScreen() throws IOException {
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
         File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File("src/test/java/FilesPS/prtscr.png");
         FileUtils.copyFile(SrcFile, DestFile);
-
        /* Actions action = new Actions(driver);
         action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();*/
+        //zapytac czy da się to zrobic innaczej (prtscr)
     }
 
     public void goToHistory() {

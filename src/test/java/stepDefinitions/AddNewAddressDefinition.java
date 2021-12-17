@@ -7,12 +7,14 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.AddressPage;
+import pages.BasePage;
 import pages.SignInPage;
 
 import java.util.concurrent.TimeUnit;
 
 public class AddNewAddressDefinition {
-    SignInPage signinUser;
+    BasePage basePage;
+    SignInPage signInUser;
     AddressPage newAddressPage;
     private WebDriver driver;
 
@@ -24,8 +26,8 @@ public class AddNewAddressDefinition {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://mystore-testlab.coderslab.pl/index.php?controller=authentication&back=my-account");
-        signinUser = new SignInPage(driver);
-        signinUser.signInPage("spoqstvoerxbrpamfa@nthrl.com", "12345678");
+        signInUser = new SignInPage(driver);
+        signInUser.signInPage("nowy@email.pl", "12345678");
     }
 
     @When("^I enter site through tiles to user Address$")

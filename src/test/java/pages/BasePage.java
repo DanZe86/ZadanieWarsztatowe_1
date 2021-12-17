@@ -23,7 +23,6 @@ public class BasePage {
 
     public String StringConverter(double element) throws IOException {
         String price = String.valueOf(element);
-
         return price;
     }
 }
