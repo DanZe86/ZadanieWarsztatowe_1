@@ -109,8 +109,8 @@ public class BuyItemDefinition {
     }
 
     @Then("I make printscreen")
-    public void i_check_the_order_with_price() {
-        // Write code here that turns the phrase above into concrete actions
+    public void i_check_the_order_with_price() throws IOException {
+        myStorePage.makePrintScreen();
 
     }
 

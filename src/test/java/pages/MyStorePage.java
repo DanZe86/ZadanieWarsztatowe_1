@@ -1,14 +1,17 @@
 package pages;
 
 
-import org.openqa.selenium.Keys;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+
 
 public class MyStorePage extends BasePage {
     public MyStorePage(WebDriver driver) {
@@ -166,9 +169,12 @@ public class MyStorePage extends BasePage {
         buttonOrderWith.click();
     }
 
-    public void makePrintScreen(){
-        Actions action = new Actions(driver);
-        action.keyDown(Keys.CONTROL).sendKeys()
+    //https://www.guru99.com/take-screenshot-selenium-webdriver.html#1
+    public void makePrintScreen() throws IOException {
+        TakesScreenshot scrShot =((TakesScreenshot) driver);
+        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        File DestFile = new File("src/test/java/FilesPS/prtscr.png");
+        FileUtils.copyFile(SrcFile, DestFile);
 
        /* Actions action = new Actions(driver);
         action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();*/
