@@ -5,7 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/cucumber/features/CreateNewAddress.feature", plugin={"pretty","html:out.html"}, glue="stepDefinitions")
+@CucumberOptions(features="src/cucumber/features/AddShoppingItem.feature", plugin={"pretty","html:out.html"}, glue="stepDefinitions")
 //DeleteAddress.feature
 //CreateNewAddress.feature
 //AddShoppingItem.feature

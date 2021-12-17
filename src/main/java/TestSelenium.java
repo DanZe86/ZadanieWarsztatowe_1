@@ -1,16 +1,48 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.junit.Assert;
 
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.io.StringReader;
 
 public class TestSelenium {
 
 
-    public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+    public static void main(String[] args) throws IOException {
+        String testString = "€35.90";
+        char[] array = new char[100];
+        double test = 28.72;
+
+        StringReader input = new StringReader(testString);
+        input.skip(1);
+        input.read(array);
+        double valueDouble = Double.parseDouble(String.valueOf(array));
+        valueDouble = valueDouble - (valueDouble * 0.2);
+        System.out.println(valueDouble);
+        String test2 = String.valueOf(valueDouble);
+        Assert.assertEquals(test2, "28.72");
+        System.out.println(valueDouble);
+        System.out.println(test);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         WebDriver driver;
         driver = new ChromeDriver();
         Scanner scan = new Scanner(System.in);
@@ -31,7 +63,7 @@ public class TestSelenium {
         WebElement inputPassword = driver.findElement(By.xpath("//input[@name='password']"));
         inputPassword.clear();
         inputPassword.click();
-        inputPassword.sendKeys(haslo);
+        inputPassword.sendKeys(haslo);*/
 
     }
 }
