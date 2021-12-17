@@ -18,6 +18,7 @@ public class BuyItemDefinition {
     BasePage basePage;
     MyStorePage myStorePage;
     SignInPage signInUser;
+    String[] value;
 
 
     @Given("I log user from exercise one")
@@ -71,8 +72,6 @@ public class BuyItemDefinition {
     @When("I add item to a shopping cart")
     public void i_add_item_to_a_shopping_cart() {
         myStorePage.addItemToCart();
-
-
     }
 
     @Then("I check if item was add it correctly")
@@ -83,7 +82,6 @@ public class BuyItemDefinition {
     @When("I go to tile checkout")
     public void i_go_to_tile_checkout() {
         myStorePage.proceedToCheckout();
-
     }
 
     @When("confirm user address")
@@ -100,19 +98,36 @@ public class BuyItemDefinition {
     @When("I pay by check and click on terms of service")
     public void i_pay_by_check() {
         myStorePage.choosePaymentMethod();
+        value = new String[1] ;
+        value[0] = myStorePage.getTotalPrice() ;
     }
 
     @When("I click on Order with an obligation to pay")
     public void i_click_on_order_with_an_obligation_to_pay_with_terms_of_service() {
         myStorePage.orderWithAnObligarion();
+        myStorePage.waitASecond();
 
     }
 
     @Then("I make printscreen")
     public void i_check_the_order_with_price() throws IOException {
         myStorePage.makePrintScreen();
-
     }
 
+    @When("I go to history order")
+    public void goToHistoryURL() {
+        myStorePage.goToHistory();
+    }
+
+    @Then("I check if price and order are correct")
+    public void check_if_price_and_order_are_correct() {
+        String order = myStorePage.getTextOrder();
+        String totalValue = value[0];
+
+        Assert.assertTrue(order.contains(totalValue));
+        Assert.assertTrue(order.contains("Awaiting check payment"));
+
+
+    }
 
 }

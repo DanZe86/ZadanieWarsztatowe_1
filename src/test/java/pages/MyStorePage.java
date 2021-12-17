@@ -2,21 +2,20 @@ package pages;
 
 
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.List;
 
 
 public class MyStorePage extends BasePage {
     public MyStorePage(WebDriver driver) {
         super(driver);
     }
+
 
     // my store tile
     @FindBy(css = ".logo.img-responsive")
@@ -67,6 +66,10 @@ public class MyStorePage extends BasePage {
     //Checkbox for payment
     @FindBy(id = "payment-option-1")
     private WebElement checboxPayment;
+    //take price from tile order
+    @FindBy(xpath = "//*[@id='cart-subtotal-products']/span[2]")
+    private WebElement totalPrice;
+
     //Checkbox for terms of service
     @FindBy(xpath = "//input[@id=\"conditions_to_approve[terms-and-conditions]\"]")
     private WebElement termsOfServiceCheckbox;
@@ -76,6 +79,16 @@ public class MyStorePage extends BasePage {
     // confirmation of your order
     @FindBy(css = ".h1.card-title")
     private WebElement outputOrderConfirmed;
+
+    // go to user account
+    @FindBy(css = ".account")
+    private WebElement userAccount;
+    // go to tile hisotryOrder
+    @FindBy(id = "history-link")
+    private WebElement historyOrder;
+    //history-link historyOrder
+
+    //.account userAccount
 
     public void goToMyStore() {
         myStoreTile.click();
@@ -109,19 +122,20 @@ public class MyStorePage extends BasePage {
         return convertedDiscountPrice;
     }
 
+    public String getTotalPrice() {
+        return totalPrice.getText();
+    }
+
     public void setSize(String size) {
         chooseSize.click();
         chooseSize.sendKeys(size);
         chooseSize.click();
-
     }
 
     public void setQuantity(String quantity) {
         inputQuantity.click();
         inputQuantity.clear();
         inputQuantity.sendKeys(quantity);
-
-
     }
 
     public void addItemToCart() {
@@ -137,8 +151,8 @@ public class MyStorePage extends BasePage {
         proceedButtonTwo.click();
     }
 
-    public void confirmAddress(){
-        if(chooseAddress.isSelected()) {
+    public void confirmAddress() {
+        if (chooseAddress.isSelected()) {
             continueButton.click();
         } else {
             chooseAddress.click();
@@ -147,8 +161,8 @@ public class MyStorePage extends BasePage {
 
     }
 
-    public void confirmShippingMethod(){
-        if(shippingMethodCheckbox.isSelected()) {
+    public void confirmShippingMethod() {
+        if (shippingMethodCheckbox.isSelected()) {
             continueDeliveryButton.click();
         } else {
             shippingMethodCheckbox.click();
@@ -156,23 +170,24 @@ public class MyStorePage extends BasePage {
         }
     }
 
-    public void choosePaymentMethod(){
-        if(checboxPayment.isSelected()) {
+    public void choosePaymentMethod() {
+        if (checboxPayment.isSelected()) {
             termsOfServiceCheckbox.click();
         } else {
             checboxPayment.click();
             termsOfServiceCheckbox.click();
         }
+
     }
 
-    public void orderWithAnObligarion(){
+    public void orderWithAnObligarion() {
         buttonOrderWith.click();
     }
 
     //https://www.guru99.com/take-screenshot-selenium-webdriver.html#1
     public void makePrintScreen() throws IOException {
-        TakesScreenshot scrShot =((TakesScreenshot) driver);
-        File SrcFile=scrShot.getScreenshotAs(OutputType.FILE);
+        TakesScreenshot scrShot = ((TakesScreenshot) driver);
+        File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
         File DestFile = new File("src/test/java/FilesPS/prtscr.png");
         FileUtils.copyFile(SrcFile, DestFile);
 
@@ -180,10 +195,21 @@ public class MyStorePage extends BasePage {
         action.keyDown(Keys.CONTROL).sendKeys("a").keyUp(Keys.CONTROL).perform();*/
     }
 
+    public void goToHistory() {
 
+        userAccount.click();
+        historyOrder.click();
+        //https://mystore-testlab.coderslab.pl/index.php?controller=order-confirmation&id_cart=76336&id_module=11&id_order=8999&key=547c03bd08d75a96e44011a8e85b5998
+    }
 
-
-
+    public String getTextOrder() {
+        List<WebElement> list = driver.findElements(By.tagName("tr"));
+        for (WebElement e : list) {
+            e.getText();
+        }
+        String orderText = list.get(1).getText();
+        return orderText;
+    }
 }
 
 

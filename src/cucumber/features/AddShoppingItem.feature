@@ -15,6 +15,8 @@ Feature: Buy item
     And I pay by check and click on terms of service
     And I click on Order with an obligation to pay
     Then I make printscreen
+    When I go to history order
+    Then I check if price and order are correct
     Examples:
       | size | quantity |
       | M    | 5        |
